@@ -1,0 +1,42 @@
+local function safe_assert (ret, err)
+  if err then ErrMessage(err) end
+end
+local function pipeto (cmd,input)
+  local outname = far.MkTemp("out")
+  local errname = far.MkTemp("err")
+  local fp = io.popen(('"%s >"%s" 2>"%s""'):format(cmd,outname,errname),"w")
+  fp:write(win.Utf8ToOem(input))
+  fp:close()
+  local err_fi = win.GetFileInfo(errname)
+  local out,err
+  if not err_fi then
+    err = "unable to create temporary file"
+  elseif err_fi.FileSize~=0 then
+    fp = io.open(errname)
+    err = fp:read("*a")
+    fp:close()
+  end
+  local out_fi = win.GetFileInfo(outname)
+  if not out_fi then
+    err = "unable to create temporary file"
+  elseif out_fi.FileSize~=0 then
+    fp = io.open(outname)
+    out = fp:read("*a")
+    fp:close()
+  end
+  safe_assert(win.DeleteFile(errname))
+  safe_assert(win.DeleteFile(outname))
+  return win.OemToUtf8(out),win.OemToUtf8(err)
+end
+
+if _cmdline=="" then
+  print "Executes specified command, putting specified text to it's input stream,"
+  print "and returns it's output/err"
+  print "Syntax: out, err = sh.pipeto(cmd,input)"
+elseif _cmdline then
+  print(pipeto(...))
+else
+  return pipeto
+end
+
+--popen2 http://lua-users.org/lists/lua-l/2007-10/msg00189.html

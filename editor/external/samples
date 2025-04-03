@@ -1,0 +1,6 @@
+   #page>div.logo+ul#navigation>li*5>a{Item$} 
+
+	html:5>h1{Hello}+p>lorem
+
+	a:link
+

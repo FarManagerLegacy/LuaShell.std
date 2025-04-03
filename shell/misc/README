@@ -1,0 +1,3 @@
+Most utilities: run dry to get help
+
+pipeTo.lua.simple: use when if piper module is not available (to be renamed to and used instead of pipeTo.lua)

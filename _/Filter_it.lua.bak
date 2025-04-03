@@ -1,0 +1,44 @@
+local function proxy (fn, var, ...)
+  if var==nil then return nil end
+  if fn(var, ...) then
+    return true, var, {n=select("#", ...), ...}
+  end
+  return false,var
+end
+
+local function filter_it (...)
+  local fn,iter,state,var = ...
+  if select('#', ...)<3 then
+    iter,fn = ...
+    if type(iter)=="table" then
+      iter = sh.iter_it(iter)
+    end
+  end
+  return function ()
+    local pass, extra
+    while true do
+      pass,var,extra = proxy(fn, iter(state, var))
+      if var==nil then break end
+      if pass then return var, unpack(extra, 1, extra.n) end
+    end
+  end
+end
+
+if _cmdline=="" then
+  print "Removes items that do not match the provided criteria."
+  print "Syntax:"
+  print "  filter_it(iter, fn) /iter: fn or list/"
+  print " or"
+  print "  filter_it(fn,iter,state,init)"
+  print "Examples:"
+  print ("  filter_it({1,2,3}, function(i) return i%2 == 1 end)", "=>",
+        sh.dump(sh.map(filter_it({1,2,3}, function(i) return i%2 == 1 end))))
+  print ("  filter_it(function(i) return i%2 == 1 end, ipairs({1,2,3}))", "=>",
+        sh.dump(sh.map(filter_it(function(i) return i%2 == 1 end, ipairs({1,2,3})))))
+elseif _cmdline then
+  print()
+  print(sh.dump(sh.collect(filter_it(sh.eval(_cmdline)))))
+else
+  return filter_it
+end
+

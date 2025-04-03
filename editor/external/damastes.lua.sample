@@ -1,0 +1,16 @@
+--https://forum.farmanager.com/viewtopic.php?t=1198
+sh.block_process([[gawk.exe -f Damastes.awk -v FS="\\\\s*\\\\|\\\\s*" -v OFS=" | "]])
+
+--[[
+| Header 1 | Another header here | This is a long header |
+| --- | --: | :-: |
+| Some data | Some more data | data |
+| data | Some long data here | more data |
+--]]
+
+--[[
+ Header 1  | Another header here | This is a long header
+ --- | --: | :-:
+ Some data | Some more data | data
+ data | Some long data here | more data
+--]]

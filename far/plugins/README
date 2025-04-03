@@ -1,0 +1,27 @@
+Utilities for FAR plugins
+=========================
+
+plugins.lua
+:	Shows plugins list and provides some actions for plugins: unload/(re)load,
+	display related info, etc.
+
+load.lua, unload.lua
+	for interactive loading/unloading with plugins/paths, specified in cmdline,
+	(or residing in current directory, see help for more info).  
+	The action is immediate (non interactive) when there is only one matching plugin,
+	or batch action specified in cmdline.
+
+FindPlug_it.lua (used by unload.lua)
+:	Far plugins iterator, enumerates plugins by specifying substr|guid|path etc.
+	Can be also called from cmdline to list plugins info (see help).
+
+Plugins_it.lua (used by FindPlug_it.lua and plugins.lua)
+:	Far plugins iterator, enumerates loaded plugins.
+	When called from cmdline - list plugins info.
+
+PluginsDLLs_it.lua (used by load.lua)
+:	Far iterator enumerating plugins (*.dll) found in specified path.
+	Can be also called from cmdline to list plugins info, in this case default path is cur dir.
+
+cachedb.lua (used by plugins.lua)
+:	Sqlite-related routines for accessing plugincache.*.db

@@ -1,0 +1,59 @@
+local sh = require"sh"
+
+NoMacro { description="Indent block with tab";
+  area="Editor"; key="ShiftTab";
+  id="B175451A-9C27-4F07-A031-0C54B1C538CF";
+  action=function()
+    sh.indent(true,"\t")
+  end;
+}
+
+NoMacro { description="Unindent block with tab";
+  area="Editor"; key="ShiftBS";
+  id="ADDB6C83-B7CA-46CB-92B4-6D0808060B3B";
+  action=function()
+    sh.indent(false,"\t")
+  end;
+}
+
+NoMacro { description="Indent block with space";
+  area="Editor"; key="";
+  id="478DEAC0-6F1A-4BF3-819D-600A31258396";
+  action=function()
+    sh.indent(true," ")
+  end;
+}
+
+NoMacro { description="Unindent block with space";
+  area="Editor"; key="";
+  id="ABEFF779-97DA-4860-B73C-DE3B4E3D5A45";
+  action=function()
+    sh.indent(false," ")
+  end;
+}
+
+-----------------------------
+local function selectBlock ()
+  if not Object.Selected then
+    local sel = sh.block_pick()
+    if sel then editor.Select(nil,sel) end
+  end
+end
+
+Macro { description="Pick&Indent block";
+  area="Editor"; key="AltShiftI";
+  id="93ABFCC4-F627-4292-AC2E-E8A5C6578DB8";
+  action=function()
+    selectBlock()
+    sh.indent(true)
+  end;
+}
+
+Macro { description="Pick&Unindent block";
+  area="Editor"; key="AltShiftU";
+  id="D461EF2B-7CBF-49C6-98EF-F642E3FAC920";
+  action=function()
+    selectBlock()
+    sh.indent(false)
+  end;
+}
