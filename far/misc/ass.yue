@@ -1,0 +1,5 @@
+--mf.postmacro 
+--Keys "F9 c a RAlt"
+mf.mainmenu"fileassociations"
+Keys "RAlt"
+mf.print(...)

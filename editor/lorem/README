@@ -1,0 +1,45 @@
+Адаптирован из https://github.com/mbpowers/lorem-nvim/.
+
+Генерирует текст, состоящий из заданного количества слов, форматирует (опционально) и вставляет в редактор.
+В отличии от большинства реализаций - текст генерируется случайный.
+Пример:
+
+```
+Quisque  quam  mattis  nulla  quis  lobortis  elementum,  phasellus sodales nunc
+vulputate  ut  risus  finibus.  Venenatis, est viverra facilisi hendrerit tortor
+quis  eget  molestie facilisi lacinia. Vivamus viverra erat finibus mollis nunc.
+Feugiat integer metus sagittis amet arcu primis potenti quis ornare.
+
+Aliquet  laoreet nullam faucibus semper posuere erat id facilisis imperdiet dui.
+Quisque semper magna egestas nisi in libero varius quis mattis a finibus tortor.
+Luctus laoreet nunc.
+
+Finibus iaculis sodales habitant habitant nisi. Rhoncus nibh morbi imperdiet vel
+bibendum etiam malesuada imperdiet duis netus sit.
+```
+
+Предусмотрена конфигурация, в частности можно задать свой список слов (в комплекте несколько файлов для примера).
+
+Может работать
+- как макрос (в редакторе добавляет пункт в меню плагинов);
+
+- как модуль: [spoiler]
+
+```lua
+local lorem = require"lorem"
+-- syntax: lorem([count][,opt])
+print(lorem())
+-- defaults can be set in this way:
+lorem.count = 128
+lorem.paragraphmin, lorem.paragraphmax = 2, 6
+```
+[/spoiler]
+
+- как скрипт [LuaShell](https://forum.farmanager.com/viewtopic.php?t=10907)
+  В этом случае параметры можно указать в командной строке, например: 
+
+```
+lorem wordspath:"zombiesextra"
+```
+
+Скачать: https://gist.github.com/johnd0e/0e05acf68eb1241e3c1a0a166c4072bc/archive/main.zip

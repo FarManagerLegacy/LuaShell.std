@@ -1,0 +1,4 @@
+cc=filesmenu changelog* edit: "%FARHOME%\Plugins"
+chm=filesmenu *.chm "" "%FARHOME%\Encyclopedia"
+gg=filesmenu $*
+ggg=filesmenu "$*" "" "" FRS_NONE

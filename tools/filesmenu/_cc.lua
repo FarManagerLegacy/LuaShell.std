@@ -1,0 +1,1 @@
+sh"filesmenu"("changelog*", "edit:", "%FARHOME%\\Plugins")

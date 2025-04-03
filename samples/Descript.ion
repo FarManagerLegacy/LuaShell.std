@@ -1,0 +1,4 @@
+﻿args.lua print list of arguments
+args_show.moon far.Show arguments
+env_browse.lua inspect exec environment
+env_browse.moon inspect exec environment
